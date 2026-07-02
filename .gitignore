@@ -1,0 +1,15 @@
+# Saída de benchmarks/avaliações
+harness_engineer/results/*
+!harness_engineer/results/.gitkeep
+
+# Configuração local do projeto hospedeiro (nunca versionar no template)
+settings.local.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# SO / editores
+.DS_Store
+Thumbs.db

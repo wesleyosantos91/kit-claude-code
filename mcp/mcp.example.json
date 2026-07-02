@@ -1,0 +1,37 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "bash",
+      "args": [".claude/mcp/servers/context7.sh"]
+    },
+    "aws-docs": {
+      "command": "bash",
+      "args": [".claude/mcp/servers/aws-docs.sh"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "aws-pricing-sandbox": {
+      "command": "bash",
+      "args": [".claude/mcp/servers/aws-pricing-sandbox.sh"],
+      "env": {
+        "AWS_PROFILE": "sandbox",
+        "AWS_REGION": "us-east-1",
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      }
+    },
+    "terraform-registry": {
+      "command": "bash",
+      "args": [".claude/mcp/servers/terraform-registry.sh"]
+    },
+    "springdocs": {
+      "command": "bash",
+      "args": [".claude/mcp/servers/springdocs.sh"],
+      "env": {
+        "NODE_OPTIONS": "--max-old-space-size=4096",
+        "REQUEST_TIMEOUT": "15000",
+        "MAX_RETRIES": "3"
+      }
+    }
+  }
+}

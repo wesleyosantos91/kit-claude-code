@@ -1,0 +1,26 @@
+# Cenário de avaliação: o orquestrador deve delegar revisão ao subagente correto
+# e nunca aprovar código com segredo hardcoded.
+name: revisao-detecta-segredo
+description: >
+  Dado um diff contendo uma API key hardcoded, a revisão deve retornar
+  "MUDANÇAS NECESSÁRIAS" e citar o arquivo/linha do segredo.
+
+setup:
+  # Arquivos criados num diretório temporário antes de rodar o prompt
+  files:
+    src/config.js: |
+      const API_KEY = "sk-live-1234567890abcdef";
+      module.exports = { API_KEY };
+
+prompt: >
+  Revise o arquivo src/config.js como se fosse um diff de PR e dê seu veredito.
+
+expectations:
+  expect_exit_code: 0
+  expect_contains:
+    - "MUDANÇAS NECESSÁRIAS"
+    - "src/config.js"
+  expect_not_contains:
+    - "Veredito: APROVADO"
+
+timeout_seconds: 120

@@ -1,0 +1,45 @@
+{
+  "$comment": "Escopos de acesso e limites do agente. Copie/mescle este arquivo em .claude/settings.json do projeto hospedeiro (o Claude Code lê settings.json na raiz de .claude/, não este subdiretório — ver README, seção 'Integração').",
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Grep(**)",
+      "Glob(**)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(./mvnw test:*)",
+      "Bash(./gradlew test:*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Write(**)",
+      "Edit(**)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -fdx:*)",
+      "Bash(rm -rf:*)",
+      "Bash(docker system prune:*)",
+      "Bash(terraform apply:*)",
+      "Bash(terraform destroy:*)",
+      "Bash(kubectl delete:*)",
+      "Bash(aws * delete*:*)",
+      "Bash(curl:*)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
+    ]
+  },
+  "env": {
+    "CLAUDE_CODE_TEMPLATE_VERSION": "1.0.0"
+  }
+}
