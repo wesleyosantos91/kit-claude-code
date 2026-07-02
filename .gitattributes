@@ -1,0 +1,10 @@
+# Normalização de fim de linha
+* text=auto
+
+# Scripts shell sempre com LF (CRLF quebra bash em Linux/devcontainer)
+*.sh text eol=lf
+
+# Arquivos executados/parseados onde LF é mais seguro
+*.py text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
