@@ -41,13 +41,18 @@ Durante o loop de desenvolvimento — para análise pontual de código use a ski
 
 | Item | Status | Observação |
 |---|---|---|
-| Escopo do diff | ✅/❌ | |
-| Testes | ✅/❌ | |
+| Escopo do diff coeso | ✅/❌ | |
+| Testes (bugfix tem regressão?) | ✅/❌ | |
 | Secrets | ✅/❌ | |
+| Contrato de API sem breaking change não versionado | ✅/❌/n.a. | |
+| Documentação atualizada | ✅/❌/n.a. | |
 | Code review | ✅/⚠️/❌ | |
 
-**Veredito: GO | NO-GO** — <justificativa em 1 frase>
+**Veredito: GO | NO-GO** — <justificativa por item bloqueante>
 ```
+
+Achados classificados pela matriz `references/review-severity-matrix.md`:
+somente CRÍTICO bloqueia sozinho; ALTO bloqueia se não houver plano de correção.
 
 ## Segurança
 

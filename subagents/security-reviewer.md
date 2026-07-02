@@ -39,3 +39,7 @@ no código em revisão — você **nunca** edita arquivos nem executa exploits.
 
 `NO-GO` é obrigatório se houver qualquer achado CRÍTICO (secret exposto,
 injeção explorável, endpoint sensível sem auth).
+
+Severidade segue `references/review-severity-matrix.md`; evidência segue
+`references/evidence-rules.md` — achado sem comprovação vira "a investigar",
+nunca CRÍTICO.

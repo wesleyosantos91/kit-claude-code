@@ -14,19 +14,24 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 ├── CLAUDE.md                 # System Prompt do orquestrador (carregado automaticamente)
 ├── skills/                   # Habilidades invocáveis pelo agente
 │   ├── analise-de-codigo/
-│   │   └── SKILL.md
-│   ├── java-quality-gate/
-│   │   ├── SKILL.md          # Gates Java: Spotless, Checkstyle, JaCoCo, PIT, ArchUnit
-│   │   └── config/           # Configs prontos (checkstyle, spotless, pom plugins...)
-│   └── pre-pr-review/
-│       └── SKILL.md          # Gate GO/NO-GO antes de abrir PR
+│   ├── commit-message/       # Conventional Commits
+│   ├── java-quality-gate/    # Gates Java + configs (checkstyle, spotless, pom...)
+│   ├── java-spring-patterns/ # Padrões Spring Boot de produção
+│   ├── pr-description/       # Descrição estruturada de PR
+│   ├── pre-pr-review/        # Gate GO/NO-GO antes de abrir PR
+│   └── terraform-module/     # Boas práticas de módulos Terraform
 ├── hooks/                    # Scripts de ciclo de vida
 │   ├── pre_tool_use.py       # Bloqueia comandos perigosos antes da execução
 │   ├── prevent_secret_leak.py# Bloqueia escrita de secrets (Write/Edit)
 │   └── post_edit_format.py   # Formata arquivos após edições
 ├── subagents/                # Agentes especializados para delegação
 │   ├── code-reviewer.md
-│   └── security-reviewer.md  # Revisão de segurança defensiva (read-only)
+│   ├── security-reviewer.md  # Revisão de segurança defensiva (read-only)
+│   ├── performance-reliability-reviewer.md
+│   └── tech-writer.md        # Documentação, ADRs, diagramas C4
+├── references/               # Governança compartilhada pelos revisores
+│   ├── review-severity-matrix.md
+│   └── evidence-rules.md
 ├── permissions/              # Escopos de acesso e limites
 │   └── settings.json
 ├── mcp/                      # Servidores MCP (AWS, Terraform, Spring)
@@ -126,6 +131,28 @@ Instalação **por máquina/projeto** (não são dependências do template — n
 | [Serena MCP](https://github.com/oraios/serena) | Navegação semântica de código via LSP (ir à definição, referências, símbolos) em vez de grep/leitura de arquivos inteiros | `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` (registrar como MCP) | Maior ganho em codebases Java grandes: o agente lê símbolos, não arquivos — menos tokens e mais precisão. Adote por projeto, não globalmente |
 
 > Leia os scripts de instalação (`curl \| bash`) antes de executá-los.
+
+## Base de conhecimento opcional (engineering-guides)
+
+O repositório [engineering-guides](https://github.com/wesleyosantos91/engineering-guides)
+contém ~100 guias de boas práticas (AWS Well-Architected, DDD, design patterns,
+K8s, resiliência de microsserviços, Spring/Quarkus). Para dar esse conhecimento
+ao agente **sem inflar este template**, adicione-o como segundo submodule nos
+projetos que quiserem:
+
+```bash
+git submodule add https://github.com/wesleyosantos91/engineering-guides.git docs/guides
+```
+
+E aponte os guias relevantes da stack no `CLAUDE.md` da raiz do projeto:
+
+```markdown
+Ao tomar decisões de arquitetura AWS, consulte docs/guides/.docs/aws/.
+Ao modelar domínio, consulte docs/guides/.docs/ddd/.
+```
+
+> Referencie diretórios específicos, não a biblioteca inteira — o agente deve
+> ler guias sob demanda, não carregá-los todos no contexto.
 
 ## Versionamento
 

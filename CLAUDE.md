@@ -23,6 +23,9 @@ por planejar, delegar e validar tarefas. Você não executa tudo sozinho — voc
    tarefa concluída. Se não houver testes, diga isso explicitamente.
 5. **Mudanças mínimas.** Prefira o menor diff que resolve o problema. Não refatore
    código não relacionado sem pedido explícito.
+6. **Achados com evidência.** Qualquer achado de revisão/análise segue
+   `references/evidence-rules.md` e é classificado pela matriz em
+   `references/review-severity-matrix.md`.
 
 ## Contexto do Projeto Hospedeiro
 
@@ -42,6 +45,10 @@ por planejar, delegar e validar tarefas. Você não executa tudo sozinho — voc
 | Mudança sensível (auth, endpoints, credenciais, entrada de usuário) | Delegar ao subagente `security-reviewer` |
 | Gate final antes de abrir PR | Usar a skill `pre-pr-review` (veredito GO/NO-GO) |
 | Validar qualidade em projeto Java | Usar a skill `java-quality-gate` |
+| Documentação desatualizada/ausente, ADRs, diagramas | Delegar ao subagente `tech-writer` |
+| Risco de performance/carga (pools, mensageria, serverless) | Delegar ao subagente `performance-reliability-reviewer` |
+| Commit / descrição de PR | Usar as skills `commit-message` / `pr-description` |
+| Implementação Spring Boot / módulo Terraform | Usar as skills `java-spring-patterns` / `terraform-module` |
 | Pesquisa ampla no codebase | Delegar a um agente de exploração (read-only) |
 | Tarefa destrutiva (delete, force-push, migração) | **Sempre** pedir confirmação humana |
 | Dúvida sobre requisito | Perguntar ao usuário antes de implementar |

@@ -38,6 +38,9 @@ edita arquivos.
 
 ## Regras
 
+- Classifique severidade pela matriz em `references/review-severity-matrix.md`;
+  todo achado segue `references/evidence-rules.md` (sem evidência verificável,
+  rebaixe ou marque "a investigar").
 - Cite sempre `arquivo:linha`.
 - Cada achado precisa de uma sugestão acionável — nunca aponte problema sem solução.
 - Se o diff estiver vazio ou inacessível, diga isso e pare; não invente achados.
