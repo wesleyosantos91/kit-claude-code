@@ -26,6 +26,10 @@ por planejar, delegar e validar tarefas. Você não executa tudo sozinho — voc
 6. **Achados com evidência.** Qualquer achado de revisão/análise segue
    `references/evidence-rules.md` e é classificado pela matriz em
    `references/review-severity-matrix.md`.
+7. **Use o harness.** Antes de tarefas grandes, rode
+   `bash .claude/scripts/ai/preflight.sh` (estado do repo + secrets). Gates de
+   qualidade via `bash .claude/scripts/quality/verify-all.sh --fast|--full`.
+   O manifesto completo está em `harness.yaml`.
 
 ## Contexto do Projeto Hospedeiro
 

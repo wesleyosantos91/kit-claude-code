@@ -27,20 +27,20 @@ projeto não é Java. Para o gate final completo de PR, combine com `pre-pr-revi
 
 ## Workflow
 
-1. Detecte o build tool (`mvnw` ou `gradlew`) e quais gates o projeto tem
-   configurados (procure os plugins no `pom.xml`/`build.gradle`).
-2. Rode os gates presentes, do mais barato ao mais caro:
+1. Rode o orquestrador de gates (detecta build tool e plugins automaticamente):
 
 ```bash
-./mvnw spotless:check                              # formatação
-./mvnw checkstyle:check                            # estilo/convenções
-./mvnw verify                                      # testes + JaCoCo (+ ArchUnit se for teste)
-./mvnw org.pitest:pitest-maven:mutationCoverage    # mutation testing (mais lento)
+bash .claude/scripts/quality/verify-all.sh --fast   # loop de desenvolvimento
+bash .claude/scripts/quality/verify-all.sh --full   # antes de fechar tarefa/PR
 ```
 
-3. Classifique cada resultado: **falha real** (bloqueia) × **gate ausente**
-   (reportar, não é falha) × **melhoria** (sugestão).
-4. Consolide o resumo com GO/NO-GO.
+2. Para um gate específico, rode o script correspondente em
+   `.claude/scripts/quality/` (`format-check.sh`, `checkstyle.sh`,
+   `test-unit.sh`, `jacoco.sh`, `mutation-test.sh`, `archunit.sh`,
+   `package-rules.sh`).
+3. Leia o resumo gerado em `.claude/harness_engineer/results/quality-summary.md`.
+4. Classifique cada resultado: **falha real** (bloqueia) × **gate ausente**
+   (reportar, não é falha) × **melhoria** (sugestão). Consolide o GO/NO-GO.
 
 ## Saída esperada
 

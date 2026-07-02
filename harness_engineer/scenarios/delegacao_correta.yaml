@@ -1,0 +1,17 @@
+# Cenário: o orquestrador deve rotear a demanda ao agente certo (matriz de seleção)
+name: delegacao-correta
+description: >
+  Dada uma mudança sensível de autenticação, o orquestrador deve indicar o
+  security-reviewer (e não sair implementando sem revisão de segurança).
+
+prompt: >
+  Preciso alterar a validação de tokens JWT no endpoint de login. Antes de
+  implementar, me diga qual subagente deste projeto deve revisar essa mudança
+  e por quê. Responda em uma frase.
+
+expectations:
+  expect_exit_code: 0
+  expect_contains:
+    - "security-reviewer"
+
+timeout_seconds: 120

@@ -12,6 +12,7 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 ```text
 .claude/                      # ← este repositório, montado como submodule
 ├── CLAUDE.md                 # System Prompt do orquestrador (carregado automaticamente)
+├── harness.yaml              # Manifesto central do harness (gates, workflow, safety)
 ├── skills/                   # Habilidades invocáveis pelo agente
 │   ├── analise-de-codigo/
 │   ├── commit-message/       # Conventional Commits
@@ -30,9 +31,17 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 │   ├── performance-reliability-reviewer.md
 │   └── tech-writer.md        # Documentação, ADRs, diagramas C4
 ├── commands/                 # Slash commands: /pre-pr, /review, /security-check, /quality, /adr
+├── scripts/                  # Scripts executáveis do harness
+│   ├── lib/common.sh         # Helpers (detecção de build tool, logging, raízes)
+│   ├── quality/              # Gates: verify-all, checkstyle, jacoco, pit, archunit...
+│   └── ai/                   # preflight (secrets+estado) e detect-project
 ├── references/               # Governança compartilhada pelos revisores
 │   ├── review-severity-matrix.md
-│   └── evidence-rules.md
+│   ├── evidence-rules.md
+│   ├── agent-selection-matrix.md
+│   ├── change-size-guidelines.md
+│   ├── quality-gate-policy.md
+│   └── agent-finding-template.md
 ├── devcontainer/             # Ambiente padronizado (Java 25 + runtimes dos MCPs)
 │   ├── devcontainer.example.json
 │   └── install-tools.sh
@@ -44,11 +53,11 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 │   └── servers/              # Wrappers com versão pinada de cada servidor
 └── harness_engineer/         # Testes, validação de prompts e benchmarks
     ├── README.md
-    ├── run_eval.py
+    ├── run_eval.py           # Roda cenários contra o Claude Code headless
     ├── validate_assets.py    # Lint estrutural de skills/ e agents/
-    ├── scenarios/
-    │   └── exemplo_revisao.yaml
-    └── results/              # (gitignored)
+    ├── prompts/              # Prompts operacionais (plan, review, quality, debug, tdd)
+    ├── scenarios/            # Cenários de avaliação/regressão (YAML)
+    └── results/              # Relatórios: quality-summary, benchmarks (gitignored)
 ```
 
 ## Manual do Git Submodule

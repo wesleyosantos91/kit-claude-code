@@ -1,0 +1,26 @@
+# Cenário: a skill commit-message deve gerar Conventional Commits válido
+name: commit-conventional
+description: >
+  Dado um diff simples de nova funcionalidade, a mensagem gerada deve seguir
+  Conventional Commits (type correto, imperativo, sem ponto final).
+
+setup:
+  files:
+    src/notes.js: |
+      export function addNote(list, note) {
+        return [...list, note];
+      }
+
+prompt: >
+  Gere apenas a mensagem de commit (Conventional Commits) para a adição do
+  arquivo src/notes.js, que cria a função addNote para adicionar notas a uma
+  lista. Responda somente com a mensagem.
+
+expectations:
+  expect_exit_code: 0
+  expect_contains:
+    - "feat"
+  expect_not_contains:
+    - "BREAKING CHANGE"
+
+timeout_seconds: 120

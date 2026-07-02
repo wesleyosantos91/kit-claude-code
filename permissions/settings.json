@@ -12,7 +12,9 @@
       "Bash(npm test:*)",
       "Bash(npm run lint:*)",
       "Bash(./mvnw test:*)",
-      "Bash(./gradlew test:*)"
+      "Bash(./gradlew test:*)",
+      "Bash(bash .claude/scripts/quality/*.sh:*)",
+      "Bash(bash .claude/scripts/ai/*.sh:*)"
     ],
     "ask": [
       "Bash(git commit:*)",

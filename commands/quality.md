@@ -4,9 +4,14 @@ description: Executa e interpreta os quality gates Java (Spotless, Checkstyle, J
 
 # /quality
 
-Execute a skill `java-quality-gate`: detecte os gates configurados no projeto,
-rode-os do mais barato ao mais caro e consolide o resumo com veredito
-**GO/NO-GO**.
+Execute a skill `java-quality-gate` via orquestrador de gates:
+
+```bash
+bash .claude/scripts/quality/verify-all.sh --fast   # (--full antes de PR)
+```
+
+Leia o resumo em `.claude/harness_engineer/results/quality-summary.md` e
+consolide o veredito **GO/NO-GO**.
 
 Regras: nunca relaxar thresholds para passar; gate ausente ≠ falha (reporte e
 sugira adotar os configs de `skills/java-quality-gate/config/`).

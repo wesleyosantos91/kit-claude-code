@@ -27,8 +27,9 @@ Durante o loop de desenvolvimento — para análise pontual de código use a ski
 
 1. **Diff:** `git diff main...HEAD --stat` — confira se o escopo bate com a intenção
    do PR (arquivos inesperados = achado).
-2. **Testes:** rode o comando de testes do projeto (ver `CLAUDE.md`, seção
-   "Contexto do Projeto Hospedeiro"). Falha = NO-GO automático.
+2. **Gates:** rode `bash .claude/scripts/quality/verify-all.sh --fast`
+   (em projetos Java) ou o comando de testes do projeto (ver `CLAUDE.md`).
+   Falha = NO-GO automático.
 3. **Secrets:** varra o diff por credenciais (`git diff main...HEAD | grep -iE
    'password|token|secret|api[_-]?key|BEGIN.*PRIVATE'`). Achado = NO-GO automático.
 4. **Revisão:** delegue o diff ao subagente `code-reviewer`.
