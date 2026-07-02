@@ -24,7 +24,7 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 │   ├── pre_tool_use.py       # Bloqueia comandos perigosos antes da execução
 │   ├── prevent_secret_leak.py# Bloqueia escrita de secrets (Write/Edit)
 │   └── post_edit_format.py   # Formata arquivos após edições
-├── subagents/                # Agentes especializados para delegação
+├── agents/                   # Subagentes especializados para delegação
 │   ├── code-reviewer.md
 │   ├── security-reviewer.md  # Revisão de segurança defensiva (read-only)
 │   ├── performance-reliability-reviewer.md
@@ -41,7 +41,7 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 └── harness_engineer/         # Testes, validação de prompts e benchmarks
     ├── README.md
     ├── run_eval.py
-    ├── validate_assets.py    # Lint estrutural de skills/ e subagents/
+    ├── validate_assets.py    # Lint estrutural de skills/ e agents/
     ├── scenarios/
     │   └── exemplo_revisao.yaml
     └── results/              # (gitignored)
@@ -110,7 +110,7 @@ de um passo de ativação no projeto hospedeiro:
 | Componente | Convenção nativa do Claude Code | Ação no projeto hospedeiro |
 |---|---|---|
 | `skills/` | `.claude/skills/<nome>/SKILL.md` | ✅ Nenhuma — funciona direto |
-| `subagents/` | `.claude/agents/*.md` | Copiar/symlink: `ln -s subagents agents` dentro de `.claude/` (ou renomear a pasta para `agents/` neste repo) |
+| `agents/` | `.claude/agents/*.md` | ✅ Nenhuma — funciona direto |
 | `permissions/settings.json` | `.claude/settings.json` | Mesclar o conteúdo no `.claude/settings.json` — como `.claude/` é o submodule, crie o settings do projeto em `.claude/settings.local.json` (gitignored pelo Claude Code) para não sujar o submodule |
 | `hooks/` | Registrados via `settings.json` → chave `hooks` | Registrar os comandos conforme o cabeçalho de cada script |
 | `mcp/` | `.mcp.json` na **raiz do projeto** | `cp .claude/mcp/mcp.example.json .mcp.json` e remover servidores não usados (ver `mcp/README.md`) |
@@ -127,7 +127,7 @@ Instalação **por máquina/projeto** (não são dependências do template — n
 | [Caveman](https://github.com/juliusbrussee/caveman) | Skill que comprime o estilo das respostas do agente (~65% menos tokens de saída) | Script do repo (Node ≥ 18) | **Conflita com a seção "Estilo de Resposta" do CLAUDE.md** (respostas claras em pt-BR vs. fragmentos telegráficos) — se adotar, ajuste o CLAUDE.md |
 | [ccusage](https://github.com/ryoppippi/ccusage) | Relatório de consumo de tokens/custo do Claude Code a partir dos logs locais (por dia, projeto, modelo) | `npx ccusage@latest` (não precisa instalar) | Comece por aqui: não dá para otimizar custo sem medir. Rode semanalmente e compare antes/depois de adotar RTK etc. |
 | [gitleaks](https://github.com/gitleaks/gitleaks) | Varredura de secrets no repositório e no histórico git | `scoop install gitleaks` (Windows) ou binário das releases | Defesa em profundidade: o hook `prevent_secret_leak.py` bloqueia na escrita; gitleaks pega o que passou (pre-commit/CI) |
-| [Repomix](https://github.com/yamadashy/repomix) | Empacota o repositório num único arquivo otimizado para contexto de IA | `npx repomix` (não precisa instalar) | Útil para gerar "context packs" de onboarding ou analisar um repo inteiro de uma vez; o kit de referência usa |
+| [Repomix](https://github.com/yamadashy/repomix) | Empacota o repositório num único arquivo otimizado para contexto de IA | `npx repomix` (não precisa instalar) | Útil para gerar "context packs" de onboarding ou analisar um repo inteiro de uma vez |
 | [Serena MCP](https://github.com/oraios/serena) | Navegação semântica de código via LSP (ir à definição, referências, símbolos) em vez de grep/leitura de arquivos inteiros | `uvx --from git+https://github.com/oraios/serena serena start-mcp-server` (registrar como MCP) | Maior ganho em codebases Java grandes: o agente lê símbolos, não arquivos — menos tokens e mais precisão. Adote por projeto, não globalmente |
 
 > Leia os scripts de instalação (`curl \| bash`) antes de executá-los.

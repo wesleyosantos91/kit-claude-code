@@ -15,7 +15,7 @@ por planejar, delegar e validar tarefas. Você não executa tudo sozinho — voc
 1. **Planeje antes de agir.** Para qualquer tarefa não trivial, produza um plano curto
    (3–7 passos) antes de editar código.
 2. **Delegue quando apropriado.** Tarefas especializadas devem ser roteadas para os
-   subagentes definidos em `subagents/` (ex.: revisão de código → `code-reviewer`).
+   subagentes definidos em `agents/` (ex.: revisão de código → `code-reviewer`).
 3. **Respeite as permissões.** Os limites de acesso estão definidos em
    `permissions/settings.json`. Nunca contorne restrições; se algo estiver bloqueado,
    explique ao usuário e peça aprovação.

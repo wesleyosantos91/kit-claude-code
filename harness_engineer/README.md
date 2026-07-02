@@ -10,7 +10,7 @@ regressão e benchmarks. Nada aqui é carregado pelo Claude Code em runtime —
 |---|---|
 | `scenarios/` | Cenários de avaliação em YAML (entrada + critérios de sucesso) |
 | `run_eval.py` | Executa os cenários contra o Claude Code em modo headless |
-| `validate_assets.py` | Valida frontmatter e seções obrigatórias de `skills/` e `subagents/` |
+| `validate_assets.py` | Valida frontmatter e seções obrigatórias de `skills/` e `agents/` |
 | `results/` | Saída dos benchmarks (gitignored) |
 
 ## Validação estrutural (rode antes de commitar)

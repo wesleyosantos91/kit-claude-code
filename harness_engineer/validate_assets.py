@@ -8,7 +8,7 @@ Uso:
     python harness_engineer/validate_assets.py
 
 Sem dependências externas. Exit code 0 = tudo válido; 1 = falhas encontradas.
-Rode antes de commitar mudanças em skills/ ou subagents/ (serve como pre-commit).
+Rode antes de commitar mudanças em skills/ ou agents/ (serve como pre-commit).
 """
 from __future__ import annotations
 
@@ -73,7 +73,7 @@ def main() -> int:
     checked = 0
 
     skills = sorted((REPO_ROOT / "skills").glob("*/SKILL.md"))
-    subagents = sorted((REPO_ROOT / "subagents").glob("*.md"))
+    subagents = sorted((REPO_ROOT / "agents").glob("*.md"))
 
     print("=== Validando skills ===")
     for path in skills:
