@@ -79,6 +79,8 @@ Configs prontos para adotar em projetos que ainda não têm os gates:
 - `spotless/eclipse-java-formatter.xml` + `spotless-java25.md`.
 - `pitest/pitest-rules.md` — política de mutation testing.
 - `archunit/architecture-rules.md` — regras de arquitetura sugeridas.
+- `archunit/ArchitectureTest.java` — teste ArchUnit pronto para copiar
+  (com `allowEmptyShould`: passa vacuosamente até os pacotes existirem).
 - `package-organization.md` — padrão de organização de pacotes (hexagonal:
   web/message/application/domain/infrastructure/core). Ao criar classes novas
   em projetos Java, siga esta convenção; nunca reestruture pacotes existentes

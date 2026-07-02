@@ -29,9 +29,13 @@ reutilizada em múltiplos projetos via **git submodule** montado no caminho `.cl
 │   ├── security-reviewer.md  # Revisão de segurança defensiva (read-only)
 │   ├── performance-reliability-reviewer.md
 │   └── tech-writer.md        # Documentação, ADRs, diagramas C4
+├── commands/                 # Slash commands: /pre-pr, /review, /security-check, /quality, /adr
 ├── references/               # Governança compartilhada pelos revisores
 │   ├── review-severity-matrix.md
 │   └── evidence-rules.md
+├── devcontainer/             # Ambiente padronizado (Java 25 + runtimes dos MCPs)
+│   ├── devcontainer.example.json
+│   └── install-tools.sh
 ├── permissions/              # Escopos de acesso e limites
 │   └── settings.json
 ├── mcp/                      # Servidores MCP (AWS, Terraform, Spring)
@@ -111,6 +115,8 @@ de um passo de ativação no projeto hospedeiro:
 |---|---|---|
 | `skills/` | `.claude/skills/<nome>/SKILL.md` | ✅ Nenhuma — funciona direto |
 | `agents/` | `.claude/agents/*.md` | ✅ Nenhuma — funciona direto |
+| `commands/` | `.claude/commands/*.md` | ✅ Nenhuma — slash commands aparecem direto |
+| `devcontainer/` | `.devcontainer/` na **raiz do projeto** | Copiar: `cp .claude/devcontainer/devcontainer.example.json .devcontainer/devcontainer.json` (+ `install-tools.sh`) |
 | `permissions/settings.json` | `.claude/settings.json` | Mesclar o conteúdo no `.claude/settings.json` — como `.claude/` é o submodule, crie o settings do projeto em `.claude/settings.local.json` (gitignored pelo Claude Code) para não sujar o submodule |
 | `hooks/` | Registrados via `settings.json` → chave `hooks` | Registrar os comandos conforme o cabeçalho de cada script |
 | `mcp/` | `.mcp.json` na **raiz do projeto** | `cp .claude/mcp/mcp.example.json .mcp.json` e remover servidores não usados (ver `mcp/README.md`) |
@@ -132,23 +138,21 @@ Instalação **por máquina/projeto** (não são dependências do template — n
 
 > Leia os scripts de instalação (`curl \| bash`) antes de executá-los.
 
-## Base de conhecimento opcional (engineering-guides)
+## Base de conhecimento opcional
 
-O repositório [engineering-guides](https://github.com/wesleyosantos91/engineering-guides)
-contém ~100 guias de boas práticas (AWS Well-Architected, DDD, design patterns,
-K8s, resiliência de microsserviços, Spring/Quarkus). Para dar esse conhecimento
-ao agente **sem inflar este template**, adicione-o como segundo submodule nos
-projetos que quiserem:
+Se você mantém um repositório de guias de boas práticas (AWS, DDD, design
+patterns, K8s...), dê esse conhecimento ao agente **sem inflar este template**
+adicionando-o como segundo submodule nos projetos que quiserem:
 
 ```bash
-git submodule add https://github.com/wesleyosantos91/engineering-guides.git docs/guides
+git submodule add <url-do-repo-de-guias> docs/guides
 ```
 
-E aponte os guias relevantes da stack no `CLAUDE.md` da raiz do projeto:
+E aponte os diretórios relevantes da stack no `CLAUDE.md` da raiz do projeto:
 
 ```markdown
-Ao tomar decisões de arquitetura AWS, consulte docs/guides/.docs/aws/.
-Ao modelar domínio, consulte docs/guides/.docs/ddd/.
+Ao tomar decisões de arquitetura AWS, consulte docs/guides/aws/.
+Ao modelar domínio, consulte docs/guides/ddd/.
 ```
 
 > Referencie diretórios específicos, não a biblioteca inteira — o agente deve
